@@ -1,6 +1,45 @@
 const KEY = '6637f2114ed7b6f45315bca3c1f53658'
-const main = () => {
-  document.querySelector('h1').textContent += '?'
+
+class Temperature {
+   constructor (temperature) {
+   this.temperature = temperature
+   }
+  
+   render () {
+
+     const Li = document.createElement('li')
+
+     const _temp = document.createElement('h4')
+     _temp.textContent = this.temperature + "°F"
+     Li.appendChild(_temp)
+     return Li
+    }
+  }
+
+class Forecast {
+  constructor (forecast) {
+    this.forecast = forecast
+  }
+
+  render () {
+
+    const Li = document.createElement('li')
+
+    const _forecast = document.createElement('h4')
+    _forecast.textContent = this.forecast
+    Li.appendChild(_forecast)
+    return Li
+  }
+
+  renderTwo () {
+    const IMG = document.createElement('img')
+    const _icon = document.createElement('img')
+    // _icon.setAttribute = this.forecast
+    console.log(this.forecast)
+    _icon.setAttribute('src', this.forecast)
+    IMG.appendChild(_icon)
+    return IMG
+  }
 }
 
 const weatherKey = () => {
@@ -28,12 +67,16 @@ const WeatherAPI = () => {
     const parent = document.querySelector('.searchResults')
     searchResults.main.temp
     console.log(searchResults.main.temp)
-    document.querySelector('.weatherResults').textContent = "High Today: " + searchResults.main.temp_max + "F"
-    document.querySelector('.weatherLow').textContent = "Low Today: " + searchResults.main.temp_min + "F"
-    document.querySelector('.weatherRainResults').textContent = "Forecast: " + searchResults.weather[0].main
-    document.querySelector('.weathericon').setAttribute('src','http://openweathermap.org/img/w/' + searchResults.weather[0].icon + ".png")
+
+    const _high = new Temperature(searchResults.main.temp_max)
+    const _low = new Temperature(searchResults.main.temp_min)
+    const _forec = new Forecast(searchResults.weather[0].main)
+    const _fIcon = new Forecast('http://openweathermap.org/img/w/' + searchResults.weather[0].icon + ".png")
+
+    document.querySelector('.weatherResults').appendChild(_high.render())
+    document.querySelector('.weatherLow').appendChild(_low.render())
+    document.querySelector('.weatherRainResults').appendChild(_forec.render())
+    document.querySelector('.weathericon').appendChild(_fIcon.renderTwo())
   })
 }
-
-document.addEventListener('DOMContentLoaded', main)
 document.querySelector('.pressHere').addEventListener('click', WeatherAPI)

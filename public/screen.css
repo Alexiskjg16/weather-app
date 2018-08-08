@@ -39,4 +39,5 @@ body {
   height: 8em;
   width: 8em;
   padding: 2em;
+  z-index: 100;
 }
