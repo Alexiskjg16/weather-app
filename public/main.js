@@ -28,8 +28,9 @@ const WeatherAPI = () => {
     const parent = document.querySelector('.searchResults')
     searchResults.main.temp
     console.log(searchResults.main.temp)
-    document.querySelector('.weatherResults').textContent = searchResults.main.temp
-    document.querySelector('.weatherRainResults').textContent = searchResults.weather[0].main
+    document.querySelector('.weatherResults').textContent = "High Today: " + searchResults.main.temp_max + "F"
+    document.querySelector('.weatherLow').textContent = "Low Today: " + searchResults.main.temp_min + "F"
+    document.querySelector('.weatherRainResults').textContent = "Forecast: " + searchResults.weather[0].main
     document.querySelector('.weathericon').setAttribute('src','http://openweathermap.org/img/w/' + searchResults.weather[0].icon + ".png")
   })
 }
